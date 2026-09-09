@@ -3,7 +3,6 @@
 <?= $this->section('content') ?>
 <section class="card">
     <h1>User Accounts</h1>
-    <p>Staff records currently stored in a temporary PHP array.</p>
     <div class="table-wrap">
         <table>
             <thead>
