@@ -1,0 +1,4 @@
+Pos Pages
+ [x] All pos pages are available
+ [x] Customer and user records are rendered
+

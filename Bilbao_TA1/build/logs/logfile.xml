@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="PosPagesTest" file="C:\xampp\htdocs\Bilbao_TA1\tests\feature\PosPagesTest.php" tests="2" assertions="12" errors="0" failures="0" skipped="0" time="0.065032">
+    <testcase name="testAllPosPagesAreAvailable" file="C:\xampp\htdocs\Bilbao_TA1\tests\feature\PosPagesTest.php" line="13" class="PosPagesTest" classname="PosPagesTest" assertions="8" time="0.054542"/>
+    <testcase name="testCustomerAndUserRecordsAreRendered" file="C:\xampp\htdocs\Bilbao_TA1\tests\feature\PosPagesTest.php" line="30" class="PosPagesTest" classname="PosPagesTest" assertions="4" time="0.010490"/>
+  </testsuite>
+</testsuites>
