@@ -13,7 +13,7 @@ final class PosPagesTest extends CIUnitTestCase
     public function testAllPosPagesAreAvailable(): void
     {
         $pages = [
-            '/'          => "Welcome to Rov's POS",
+            '/'          => "Run your records with confidence.",
             '/about'     => 'About the POS System',
             '/customers' => 'Customer Accounts',
             '/users'     => 'User Accounts',
