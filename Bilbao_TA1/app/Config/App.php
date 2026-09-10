@@ -4,6 +4,9 @@ namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+// Automatically detect protocol and current host
+defined('DYNAMIC_BASE_URL') || define('DYNAMIC_BASE_URL', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . '/');
+
 class App extends BaseConfig
 {
     /**
@@ -16,7 +19,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'https://kone-pos.onrender.com/';
+    public string $baseURL = DYNAMIC_BASE_URL;
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -100,10 +103,10 @@ class App extends BaseConfig
      * Negotiate Locale
      * --------------------------------------------------------------------------
      *
-     * If true, the current Request object will automatically determine the
-     * language to use based on the value of the Accept-Language header.
-     *
-     * If false, no automatic detection will be performed.
+     * If true, this will force every request made to this application to be
+     * made via a secure connection (HTTPS). If the incoming request is not
+     * secure, the user will be redirected to a secure version of the page
+     * and the HTTP Strict Transport Security (HSTS) header will be set.
      */
     public bool $negotiateLocale = false;
 
