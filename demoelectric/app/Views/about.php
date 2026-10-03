@@ -7,7 +7,7 @@
     <div class="container"> 
         <div class="row text-center"> 
             <div class="col-lg-8 mx-auto"> 
-                <h1 class="display-4 fw-bold mb-4">About Puihaha Electric</h1> 
+                <h1 class="display-4 fw-bold mb-4">About PowerFlow Electric</h1>
                 <p class="lead">Powering communities with excellence, integrity, and innovation for over 
 25 years</p> 
             </div> 
@@ -22,13 +22,13 @@
             <div class="col-lg-6"> 
                 <h2 class="display-5 fw-bold text-primary-custom mb-4">Our Story</h2> 
                 <p class="lead text-muted mb-4">Founded in 1999 by master electrician John Benedic R. 
-Enriquez, Puihaha Electric began as a small family business with a simple mission: to provide safe, 
+Enriquez, PowerFlow Electric began as a small family business with a simple mission: to provide safe,
 reliable, and affordable electrical services to our community.</p> 
                 <p class="mb-4">What started as a one-man operation has grown into a trusted electrical 
 contractor serving thousands of residential and commercial clients across the region. Our 
 commitment to excellence, continuous learning, and customer satisfaction has been the driving 
 force behind our success.</p> 
-                <p class="mb-4">Today, Puihaha Electric stands as a testament to the power of hard work, 
+                <p class="mb-4">Today, PowerFlow Electric stands as a testament to the power of hard work,
 dedication, and unwavering commitment to quality. We've built our reputation one project at a 
 time, always putting safety and customer satisfaction first.</p> 
             </div> 
@@ -115,7 +115,7 @@ mx-auto" style="width: 120px; height: 120px;">
                     <h4 class="text-primary-custom mb-2">John Benedic R. Enriquez</h4> 
                     <p class="text-secondary-custom fw-semibold mb-3">Founder & Master Electrician</p> 
                     <p class="text-muted small">With over 30 years of experience, John Benedic founded 
-Puihaha Electric with a vision to provide exceptional electrical services. Licensed master 
+PowerFlow Electric with a vision to provide exceptional electrical services. Licensed master
 electrician and certified in renewable energy systems.</p> 
                 </div> 
             </div> 
@@ -277,7 +277,7 @@ Service Award</p>
                             <div class="col-md-8"> 
                                 <div class="card p-3"> 
                                     <h5 class="text-primary-custom mb-2">Company Founded</h5> 
-                                    <p class="text-muted mb-0">John Benedic R. Enriquez establishes Puihaha 
+                                    <p class="text-muted mb-0">John Benedic R. Enriquez establishes PowerFlow
 Electric as a residential electrical service provider</p> 
                                 </div> 
                             </div> 
@@ -367,7 +367,7 @@ completed projects</p>
         <div class="row text-center"> 
             <div class="col-lg-8 mx-auto"> 
                 <h2 class="display-5 fw-bold mb-4">Ready to Work with Us?</h2> 
-                <p class="lead mb-4">Experience the Puihaha Electric difference. Contact us today for a 
+                <p class="lead mb-4">Experience the PowerFlow Electric difference. Contact us today for a
 free consultation and discover why thousands of customers trust us with their electrical 
 needs.</p> 
                 <div class="d-flex flex-wrap justify-content-center gap-3"> 

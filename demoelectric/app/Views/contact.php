@@ -7,7 +7,7 @@
     <div class="container"> 
         <div class="row text-center"> 
             <div class="col-lg-8 mx-auto"> 
-                <h1 class="display-4 fw-bold mb-4">Contact Puihaha Electric</h1> 
+                <h1 class="display-4 fw-bold mb-4">Contact PowerFlow Electric</h1>
                 <p class="lead">Get in touch with our expert team for all your electrical needs. We're here 
 to help 24/7.</p> 
             </div> 
@@ -46,9 +46,9 @@ States</p>
                     </div> 
                     <h4 class="text-primary-custom mb-3">Email Us</h4> 
 <p class="text-muted mb-
-2"><strong>General:</strong><br>info@Puihahaelectric.com</p> 
+2"><strong>General:</strong><br>info@powerflowelectric.com</p>
                     <p class="text-muted mb-
-0"><strong>Emergency:</strong><br>emergency@Puihahaelectric.com</p> 
+0"><strong>Emergency:</strong><br>emergency@powerflowelectric.com</p>
                 </div> 
             </div> 
             <div class="col-lg-3 col-md-6"> 
@@ -169,7 +169,7 @@ timeline, and any specific requirements... " required><?= old('message') ?></tex
                                     <div class="form-check"> 
                                         <input class="form-check-input" type="checkbox" id="consent" required> 
                                         <label class="form-check-label text-muted" for="consent"> 
-                                            I agree to be contacted by Puihaha Electric regarding my inquiry and 
+                                            I agree to be contacted by PowerFlow Electric regarding my inquiry and
 understand that my information will be kept confidential. 
                                         </label> 
                                     </div> 
@@ -202,7 +202,7 @@ emergency hotline for immediate assistance.</p>
                     <a href="tel:5551234567" class="btn btn-warning btn-lg"> 
                         <i class="fas fa-phone me-2"></i>Emergency: (555) 123-4567 
                     </a> 
-                    <a href="mailto:emergency@Puihahaelectric.com" class="btn btn-outline-light btn-lg"> 
+                    <a href="mailto:emergency@powerflowelectric.com" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-envelope me-2"></i>Emergency Email 
                     </a> 
                 </div> 

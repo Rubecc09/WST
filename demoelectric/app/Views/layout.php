@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? $title : 'Puihaha Electric' ?></title>
+    <title><?= isset($title) ? $title : 'PowerFlow Electric' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
         rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -165,7 +165,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <i class="fas fa-bolt text-warning me-2"></i>Puihaha Electric
+                <i class="fas fa-bolt text-warning me-2"></i>PowerFlow Electric
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bstarget="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -192,6 +192,11 @@
                         <a class="nav-link <?= (isset($page) && $page == 'register') ? 'active' : '' ?>" href="<?=
                                                                                                                 base_url('register') ?>">Register</a>
                     </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary" href="<?= base_url(session()->get('isLoggedIn') ? 'dashboard' : 'login') ?>">
+                            <i class="fas fa-user-shield me-1"></i><?= session()->get('isLoggedIn') ? 'Dashboard' : 'Admin Login' ?>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -205,7 +210,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <h5><i class="fas fa-bolt text-warning me-2"></i>Puihaha Electric</h5>
+                    <h5><i class="fas fa-bolt text-warning me-2"></i>PowerFlow Electric</h5>
                     <p class="mb-3">Providing reliable and sustainable electrical solutions for over 25 years.
                         Your trusted partner for all electrical needs.</p>
                     <div class="social-icons">
@@ -239,7 +244,7 @@
                         <li><i class="fas fa-map-marker-alt me-2"></i>123 Electric Avenue, Power City, PC
                             12345</li>
                         <li><i class="fas fa-phone me-2"></i>(555) 123-4567</li>
-                        <li><i class="fas fa-envelope me-2"></i>info@Puihahaelectric.com</li>
+                        <li><i class="fas fa-envelope me-2"></i>info@powerflowelectric.com</li>
                         <li><i class="fas fa-clock me-2"></i>24/7 Emergency Service</li>
                     </ul>
                 </div>
@@ -247,7 +252,7 @@
             <hr class="my-4">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Puihaha Electric. All rights reserved.</p>
+                    <p class="mb-0">&copy; 2025 PowerFlow Electric. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <p class="mb-0">Licensed & Insured | License #EL123456</p>
