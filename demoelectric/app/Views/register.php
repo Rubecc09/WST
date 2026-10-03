@@ -104,6 +104,15 @@ assistance</p>
                                     <i class="fas fa-user me-2"></i>Personal Information 
                                 </h4> 
                                 <div class="row g-3"> 
+                                    <div class="col-12">
+                                        <label for="username" class="form-label fw-semibold">Username *</label>
+                                        <input type="text" class="form-control form-control-lg <?= isset($validation['username']) ? 'is-invalid' : '' ?>"
+                                               id="username" name="username" value="<?= esc(old('username')) ?>" minlength="4" required>
+                                        <div class="form-text">Use at least 4 characters.</div>
+                                        <?php if (isset($validation['username'])): ?>
+                                            <div class="invalid-feedback"><?= esc($validation['username']) ?></div>
+                                        <?php endif; ?>
+                                    </div>
                                     <div class="col-md-6"> 
                                         <label for="first_name" class="form-label fw-semibold">First Name *</label> 
                                         <input type="text" class="form-control form-control-lg <?= 
@@ -270,8 +279,8 @@ name="newsletter">
                         </form> 
                          
                         <div class="text-center mt-4"> 
-                            <p class="text-muted">Already have an account? <a href="<?= base_url('contact') ?>" 
-class="text-primary-custom fw-semibold">Contact us</a> for assistance.</p> 
+                            <p class="text-muted">Already have an account? <a href="<?= base_url('customer/login') ?>"
+class="text-primary-custom fw-semibold">Customer Login</a></p>
                         </div> 
                     </div> 
                 </div> 

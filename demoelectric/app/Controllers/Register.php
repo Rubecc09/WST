@@ -2,14 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\CustomerAccountModel;
 
 class Register extends BaseController
 {
-    protected $userModel;
+    protected CustomerAccountModel $customerModel;
+
     public function __construct()
     {
-        $this->userModel = new User();
+        $this->customerModel = new CustomerAccountModel();
     }
     public function index(): string
     {
@@ -28,7 +29,8 @@ class Register extends BaseController
         $validation->setRules([
             'first_name' => 'required|min_length[2]|max_length[100]',
             'last_name' => 'required|min_length[2]|max_length[100]',
-            'email' => 'required|valid_email|is_unique[users.email]',
+            'username' => 'required|min_length[4]|max_length[100]|alpha_numeric_punct|is_unique[customer_accounts.username]',
+            'email' => 'required|valid_email|is_unique[customer_accounts.email]',
             'phone' => 'required|min_length[10]|max_length[20]',
             'address' => 'required|min_length[5]|max_length[255]',
             'city' => 'required|min_length[2]|max_length[100]',
@@ -42,26 +44,27 @@ class Register extends BaseController
             session()->setFlashdata('validation', $validation->getErrors());
             return redirect()->back()->withInput();
         }
-        $userData = [
-            'first_name' => $this->request->getPost('first_name'),
-            'last_name' => $this->request->getPost('last_name'),
+        $customerData = [
+            'account_number' => $this->generateUniqueValue('account_number', 'PF-' . date('Y') . '-'),
+            'meter_number' => $this->generateUniqueValue('meter_number', 'MTR-'),
+            'username' => trim((string) $this->request->getPost('username')),
+            'customer_name' => trim((string) $this->request->getPost('first_name')) . ' ' . trim((string) $this->request->getPost('last_name')),
             'email' => $this->request->getPost('email'),
             'phone' => $this->request->getPost('phone'),
-            'address' => $this->request->getPost('address'),
-            'city' => $this->request->getPost('city'),
-            'state' => $this->request->getPost('state'),
-            'zip_code' => $this->request->getPost('zip_code'),
+            'address' => implode(', ', [
+                trim((string) $this->request->getPost('address')),
+                trim((string) $this->request->getPost('city')),
+                trim((string) $this->request->getPost('state')) . ' ' . trim((string) $this->request->getPost('zip_code')),
+            ]),
             'password' => $this->request->getPost('password'),
-            'user_type' => 'customer',
-            'is_active' => true,
-            'email_verified' => false
+            'connection_type' => 'residential',
+            'status' => 'active',
         ];
         try {
-            $userId = $this->userModel->insert($userData);
-            if ($userId) {
-                session()->setFlashdata('success', 'Registration successful! Welcome to PowerFlow
-Electric. You can now contact us for your electrical needs.');
-                return redirect()->to('/register');
+            $customerId = $this->customerModel->insert($customerData);
+            if ($customerId) {
+                return redirect()->to(base_url('customer/login'))
+                    ->with('success', 'Registration successful! You can now log in to your customer account.');
             } else {
                 session()->setFlashdata('error', 'Registration failed. Please try again.');
                 return redirect()->back()->withInput();
@@ -70,5 +73,14 @@ Electric. You can now contact us for your electrical needs.');
             session()->setFlashdata('error', 'Registration failed: ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
+    }
+
+    private function generateUniqueValue(string $field, string $prefix): string
+    {
+        do {
+            $value = $prefix . strtoupper(bin2hex(random_bytes(3)));
+        } while ($this->customerModel->where($field, $value)->first() !== null);
+
+        return $value;
     }
 }

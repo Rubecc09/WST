@@ -38,7 +38,7 @@
             </div>
             <button class="btn btn-primary btn-lg w-100" type="submit"><i class="fas fa-right-to-bracket me-2"></i>Log In</button>
         </form>
-        <a class="d-block text-center mt-4" href="<?= base_url() ?>">← Back to company website</a>
+        <a class="btn btn-outline-secondary w-100 mt-3" href="<?= base_url() ?>"><i class="fas fa-house me-2"></i>Home</a>
     </div>
 </div>
 </body>

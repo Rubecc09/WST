@@ -192,6 +192,11 @@
                         <a class="nav-link <?= (isset($page) && $page == 'register') ? 'active' : '' ?>" href="<?=
                                                                                                                 base_url('register') ?>">Register</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url(session()->get('customerLoggedIn') ? 'customer/account' : 'customer/login') ?>">
+                            <?= session()->get('customerLoggedIn') ? 'My Account' : 'Customer Login' ?>
+                        </a>
+                    </li>
                     <li class="nav-item ms-lg-2">
                         <a class="btn btn-primary" href="<?= base_url(session()->get('isLoggedIn') ? 'dashboard' : 'login') ?>">
                             <i class="fas fa-user-shield me-1"></i><?= session()->get('isLoggedIn') ? 'Dashboard' : 'Admin Login' ?>

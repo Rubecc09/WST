@@ -16,6 +16,14 @@ $routes->post('/register', 'Register::create');
 $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::attempt');
 
+$routes->get('/customer/login', 'CustomerAuth::login');
+$routes->post('/customer/login', 'CustomerAuth::attempt');
+
+$routes->group('customer', ['filter' => 'customerAuth'], static function ($routes) {
+    $routes->get('account', 'CustomerAuth::account');
+    $routes->post('logout', 'CustomerAuth::logout');
+});
+
 $routes->group('', ['filter' => 'auth'], static function ($routes) {
     $routes->get('/dashboard', 'CustomerAccounts::index');
     $routes->get('/customers/new', 'CustomerAccounts::new');
