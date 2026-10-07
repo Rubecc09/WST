@@ -57,6 +57,17 @@ class Database extends Config
         ],
     ];
 
+    public function __construct()
+{
+    parent::__construct();
+
+    $this->default['hostname'] = getenv('AIVEN_DB_HOST') ?: $this->default['hostname'];
+    $this->default['port'] = (int) (getenv('AIVEN_DB_PORT') ?: $this->default['port']);
+    $this->default['username'] = getenv('AIVEN_DB_USER') ?: $this->default['username'];
+    $this->default['password'] = getenv('AIVEN_DB_PASSWORD') ?: $this->default['password'];
+    $this->default['database'] = getenv('AIVEN_DB_NAME') ?: $this->default['database'];
+}
+
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
