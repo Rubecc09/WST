@@ -13,7 +13,7 @@ class AdminSeeder extends Seeder
             $table->insert([
                 'username' => 'admin',
                 'password' => password_hash('admin123', PASSWORD_DEFAULT),
-                'display_name' => 'PowerFlow Administrator',
+                'display_name' => 'WER Administrator',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);

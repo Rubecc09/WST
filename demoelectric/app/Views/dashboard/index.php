@@ -1,7 +1,7 @@
 <?= $this->extend('dashboard/layout') ?>
 <?= $this->section('content') ?>
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-    <div><h1 class="h2 mb-1">Customer Accounts</h1><p class="text-muted mb-0">Manage PowerFlow Electric service accounts.</p></div>
+    <div><h1 class="h2 mb-1">Customer Accounts</h1><p class="text-muted mb-0">Manage WER Electric service accounts.</p></div>
     <a class="btn btn-primary" href="<?= base_url('customers/new') ?>"><i class="fas fa-plus me-2"></i>Add Customer</a>
 </div>
 <div class="row g-3 mb-4">

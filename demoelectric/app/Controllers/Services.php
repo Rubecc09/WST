@@ -7,7 +7,7 @@ class Services extends BaseController
     public function index(): string
     {
         $data = [
-            'title' => 'Our Services - PowerFlow Electric',
+            'title' => 'Our Services - WER Electric',
             'page' => 'services'
         ];
         return view('services', $data);

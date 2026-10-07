@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= esc($title) ?> | PowerFlow Electric</title>
+    <title><?= esc($title) ?> | WER Electric</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="card login-card"><div class="card-body p-4 p-md-5">
-    <div class="text-center mb-4"><div class="brand-icon mb-3"><i class="fas fa-bolt"></i></div><h1 class="h3 fw-bold mb-1">Customer Login</h1><p class="text-muted">PowerFlow Electric</p></div>
+    <div class="text-center mb-4"><div class="brand-icon mb-3"><i class="fas fa-bolt"></i></div><h1 class="h3 fw-bold mb-1">Customer Login</h1><p class="text-muted">WER Electric</p></div>
     <?php if (session()->getFlashdata('error')): ?><div class="alert alert-danger"><?= esc(session()->getFlashdata('error')) ?></div><?php endif ?>
     <?php if (session()->getFlashdata('success')): ?><div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div><?php endif ?>
     <form action="<?= base_url('customer/login') ?>" method="post">

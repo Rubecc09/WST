@@ -7,7 +7,7 @@
     <div class="container"> 
         <div class="row text-center"> 
             <div class="col-lg-8 mx-auto"> 
-                <h1 class="display-4 fw-bold mb-4">Join PowerFlow Electric</h1>
+                <h1 class="display-4 fw-bold mb-4">Join WER Electric</h1>
                 <p class="lead">Register to access exclusive customer benefits, service history, and 
 priority scheduling</p> 
             </div> 
@@ -79,7 +79,7 @@ assistance</p>
                     <div class="card-body p-5"> 
                         <div class="text-center mb-4"> 
                             <h2 class="display-6 fw-bold text-primary-custom mb-3">Create Your Account</h2> 
-                            <p class="lead text-muted">Join the PowerFlow Electric family today</p>
+                            <p class="lead text-muted">Join the WER Electric family today</p>
                         </div> 
                          
                         <?php if (isset($success) && $success): ?> 

@@ -7,7 +7,7 @@ class Contact extends BaseController
     public function index(): string
     {
         $data = [
-            'title' => 'Contact Us - PowerFlow Electric',
+            'title' => 'Contact Us - WER Electric',
             'page' => 'contact',
             'success' => session()->getFlashdata('success'),
             'error' => session()->getFlashdata('error'),

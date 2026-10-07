@@ -1,5 +1,5 @@
 /** 
- * PowerFlow Electric - Custom JavaScript 
+ * WER Electric - Custom JavaScript 
  * Enhanced interactions and animations 
  */ 
  
@@ -293,7 +293,7 @@ height: 50px;
     }); 
      
     // Console welcome message 
-    console.log('%cPowerFlow Electric', 'color: #1e40af; font-size: 24px; font-weight: bold;'); 
+    console.log('%cWER Electric', 'color: #1e40af; font-size: 24px; font-weight: bold;'); 
     console.log('%cWebsite powered by CodeIgniter 4', 'color: #f59e0b; font-size: 14px;'); 
      
 }); 

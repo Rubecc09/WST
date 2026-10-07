@@ -15,7 +15,7 @@ class Register extends BaseController
     public function index(): string
     {
         $data = [
-            'title' => 'Register - PowerFlow Electric',
+            'title' => 'Register - WER Electric',
             'page' => 'register',
             'success' => session()->getFlashdata('success'),
             'error' => session()->getFlashdata('error'),

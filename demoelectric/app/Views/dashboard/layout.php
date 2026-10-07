@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= esc($title) ?> | PowerFlow Electric</title>
+    <title><?= esc($title) ?> | WER Electric</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --powerflow:#0b315d; --accent:#f5a623; }
+        :root { --wer-electric:#0b315d; --accent:#f5a623; }
         body { background:#f4f7fb; color:#263442; }
-        .admin-nav { background:var(--powerflow); }
+        .admin-nav { background:var(--wer-electric); }
         .navbar-brand { font-weight:800; }
         .stat-card { border:0; border-left:5px solid var(--accent); box-shadow:0 .4rem 1.2rem rgba(11,49,93,.08); }
         .panel { border:0; border-radius:1rem; box-shadow:0 .4rem 1.5rem rgba(11,49,93,.08); }
@@ -23,7 +23,7 @@
 <body>
 <nav class="navbar navbar-dark admin-nav">
     <div class="container-fluid px-lg-4">
-        <a class="navbar-brand" href="<?= base_url('dashboard') ?>"><i class="fas fa-bolt text-warning me-2"></i>PowerFlow Electric Admin</a>
+        <a class="navbar-brand" href="<?= base_url('dashboard') ?>"><i class="fas fa-bolt text-warning me-2"></i>WER Electric Admin</a>
         <div class="d-flex align-items-center gap-3 text-white">
             <span class="d-none d-md-inline">Hi, <?= esc(session()->get('displayName')) ?></span>
             <a class="btn btn-outline-light btn-sm" href="<?= base_url() ?>">Website</a>
