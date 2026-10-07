@@ -9,11 +9,21 @@ use CodeIgniter\Database\Config;
  */
 class Database extends Config
 {
+    /**
+     * Directory containing database migrations and seeds.
+     */
     public string $filesPath = APPPATH . 'Database' . DIRECTORY_SEPARATOR;
 
+    /**
+     * Default database connection group.
+     */
     public string $defaultGroup = 'default';
 
-    /** @var array<string, mixed> */
+    /**
+     * Main application database connection.
+     *
+     * @var array<string, mixed>
+     */
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'mysql-a7469e1-wer-electric.j.aivencloud.com',
@@ -47,7 +57,11 @@ class Database extends Config
         ],
     ];
 
-    /** @var array<string, mixed> */
+    /**
+     * Database connection used by automated tests.
+     *
+     * @var array<string, mixed>
+     */
     public array $tests = [
         'DSN'         => '',
         'hostname'    => '127.0.0.1',
@@ -82,10 +96,21 @@ class Database extends Config
         // Apply Render-safe variables after CodeIgniter environment processing,
         // preventing stale dotted variables from replacing the verified endpoint.
         $this->default['hostname'] = 'mysql-a7469e1-wer-electric.j.aivencloud.com';
-        $this->default['port'] = 17207;
-        $this->default['username'] = getenv('AIVEN_DB_USER') ?: 'avnadmin';
-        $this->default['password'] = getenv('AIVEN_DB_PASSWORD') ?: '';
-        $this->default['database'] = getenv('AIVEN_DB_NAME') ?: 'defaultdb';
+
+        $this->default['port'] = (int) (
+            getenv('AIVEN_DB_PORT')
+            ?: $this->default['port']
+        );
+
+        $this->default['username'] = getenv('AIVEN_DB_USER')
+            ?: $this->default['username'];
+
+        $this->default['password'] = getenv('AIVEN_DB_PASSWORD')
+            ?: $this->default['password'];
+
+        $this->default['database'] = getenv('AIVEN_DB_NAME')
+            ?: $this->default['database'];
+
         $this->default['DBDebug'] = ENVIRONMENT !== 'production';
 
         if (ENVIRONMENT === 'testing') {
