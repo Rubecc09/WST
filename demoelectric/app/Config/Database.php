@@ -93,8 +93,7 @@ class Database extends Config
     {
         parent::__construct();
 
-        $this->default['hostname'] = getenv('AIVEN_DB_HOST')
-            ?: $this->default['hostname'];
+        $this->default['hostname'] = 'mysql-a7469e1-wer-electric.j.aivencloud.com';
 
         $this->default['port'] = (int) (
             getenv('AIVEN_DB_PORT')
