@@ -13,16 +13,13 @@ class MoveCustomersToCustomerAccounts extends Migration
             $this->forge->addColumn('customer_accounts', [
                 'username' => ['type' => 'VARCHAR', 'constraint' => 100, 'null' => true, 'after' => 'account_number'],
             ]);
+
+            $this->db->query('ALTER TABLE customer_accounts ADD UNIQUE KEY unique_customer_username (username)');
         }
         if (! in_array('password', $fields, true)) {
             $this->forge->addColumn('customer_accounts', [
                 'password' => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => true, 'after' => 'username'],
             ]);
-        }
-
-        $indexes = $this->db->getIndexData('customer_accounts');
-        if (! isset($indexes['unique_customer_username'])) {
-            $this->db->query('ALTER TABLE customer_accounts ADD UNIQUE KEY unique_customer_username (username)');
         }
 
         $this->forge->dropTable('users', true);
