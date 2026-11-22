@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use LogicException;
 
@@ -15,6 +17,43 @@ class Member extends Model
 {
     /** @use HasFactory<MemberFactory> */
     use HasFactory;
+
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(MembershipTransaction::class);
+    }
+
+    public function approvedMembership(): HasOne
+    {
+        return $this->hasOne(MembershipTransaction::class)->ofMany(
+            ['id' => 'max'],
+            fn ($query) => $query->whereIn('status', [MembershipTransaction::APPROVED, MembershipTransaction::EXPIRED])
+        );
+    }
+
+    public function unresolvedApplication(): HasOne
+    {
+        return $this->hasOne(MembershipTransaction::class)->ofMany(
+            ['id' => 'max'],
+            fn ($query) => $query->whereIn('status', MembershipTransaction::UNRESOLVED)
+        );
+    }
+
+    public function paidMembershipStatus(): string
+    {
+        $approved = $this->approvedMembership;
+        if (! $approved) {
+            return 'Pending';
+        }
+        if ($approved->status === MembershipTransaction::EXPIRED || $approved->membership_end_date?->lt(today())) {
+            return 'Expired';
+        }
+        if (! $approved->membership_start_date || ! $approved->membership_end_date || $approved->membership_start_date->gt(today())) {
+            return 'Pending';
+        }
+
+        return 'Active';
+    }
 
     protected $attributes = ['status' => 'Active'];
 

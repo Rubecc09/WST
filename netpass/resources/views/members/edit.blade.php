@@ -6,7 +6,7 @@
 @section('content')
     <div class="page-heading page-heading-compact">
         <div>
-            <a class="back-link" href="{{ route('members.show', $member) }}"><x-icon name="arrow-left" /> Back to profile</a>
+            <a class="back-link" href="{{ route('members.index') }}"><x-icon name="arrow-left" /> Back to members</a>
             <h1>Edit member</h1>
             <p class="page-description">Update {{ $member->full_name }}’s profile and membership details.</p>
         </div>

@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Member;
 use App\Models\MembershipCategory;
 use App\Models\MembershipLevel;
+use App\Models\User;
 use Database\Seeders\MembershipCategorySeeder;
 use Database\Seeders\MembershipLevelSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,6 +18,7 @@ class MemberManagementTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->actingAs(User::factory()->admin()->create());
 
         $this->withoutVite();
         $this->seed([MembershipCategorySeeder::class, MembershipLevelSeeder::class]);
@@ -50,9 +52,13 @@ class MemberManagementTest extends TestCase
 
         $response->assertOk()
             ->assertSee('Total members')
-            ->assertSee('Active members')
-            ->assertSee('Inactive members')
+            ->assertSee('Active accounts')
+            ->assertSee('Inactive accounts')
             ->assertSee('Jamie Rivera')
+            ->assertSee('Membership Level')
+            ->assertDontSee('Approved:')
+            ->assertDontSee('Requested:')
+            ->assertDontSee('Paid membership:')
             ->assertDontSee('Jordan Lee');
     }
 
@@ -79,6 +85,9 @@ class MemberManagementTest extends TestCase
             ->assertRedirect();
 
         $member = Member::where('email', 'taylor@example.com')->firstOrFail();
+        $this->assertDatabaseCount('membership_transactions', 0);
+        $this->assertNull($member->approvedMembership);
+        $this->assertSame('Pending', $member->paidMembershipStatus());
 
         $this->assertDatabaseHas('members', [
             'id' => $member->id,
@@ -113,7 +122,7 @@ class MemberManagementTest extends TestCase
 
         $this->get(route('members.edit', $member))
             ->assertOk()
-            ->assertSee('value="'.$member->full_name.'"', false)
+            ->assertSee('value="'.e($member->full_name).'"', false)
             ->assertSee('Edit member');
 
         $this->put(route('members.update', $member), [
@@ -124,7 +133,10 @@ class MemberManagementTest extends TestCase
             'membership_category_id' => $member->membership_category_id,
             'membership_level_id' => $member->membership_level_id,
             'status' => 'Active',
-        ])->assertRedirect(route('members.show', $member));
+        ])->assertRedirect(route('members.index'))
+            ->assertSessionHas('success', 'Member details updated successfully.');
+
+        $this->assertSame('Updated Member', $member->fresh()->full_name);
 
         $this->patch(route('members.deactivate', $member))
             ->assertRedirect(route('members.index'));
@@ -133,5 +145,47 @@ class MemberManagementTest extends TestCase
         $this->patch(route('members.reactivate', $member))
             ->assertRedirect(route('members.index'));
         $this->assertSame('Active', $member->fresh()->status);
+    }
+
+    public function test_member_forms_order_levels_and_keep_custom_options(): void
+    {
+        MembershipLevel::factory()->create(['name' => 'VIP']);
+        MembershipLevel::factory()->create(['name' => 'Academy']);
+        $member = Member::factory()->create([
+            'membership_level_id' => MembershipLevel::where('name', 'Silver')->firstOrFail()->id,
+        ]);
+
+        foreach ([route('members.create'), route('members.edit', $member)] as $url) {
+            $this->get($url)->assertOk()->assertViewHas('levels', fn ($levels) => $levels->pluck('name')->all() === ['Basic', 'Silver', 'Gold', 'Platinum', 'Academy', 'VIP']
+            );
+        }
+
+        $this->get(route('members.create'))
+            ->assertSee('placeholder="David Martinez"', false)
+            ->assertSee('placeholder="david.martinez@example.com"', false)
+            ->assertDontSee('value="David Martinez"', false)
+            ->assertDontSee('value="david.martinez@example.com"', false);
+
+        $this->get(route('members.edit', $member))
+            ->assertSee('href="'.route('members.index').'">Cancel</a>', false)
+            ->assertSee('value="'.e($member->full_name).'"', false);
+    }
+
+    public function test_invalid_member_update_returns_to_edit_without_saving(): void
+    {
+        $member = Member::factory()->create();
+        $originalName = $member->full_name;
+
+        $this->from(route('members.edit', $member))
+            ->put(route('members.update', $member), ['full_name' => 'Unsaved name', 'email' => 'invalid'])
+            ->assertRedirect(route('members.edit', $member))
+            ->assertSessionHasErrors('email')
+            ->assertSessionHasInput('full_name', 'Unsaved name');
+
+        $this->assertSame($originalName, $member->fresh()->full_name);
+        $this->followingRedirects()->from(route('members.edit', $member))
+            ->put(route('members.update', $member), ['full_name' => 'Unsaved name', 'email' => 'invalid'])
+            ->assertSee('Please review the highlighted fields.')
+            ->assertSee('id="email-error"', false);
     }
 }

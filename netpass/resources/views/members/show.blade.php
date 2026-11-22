@@ -34,7 +34,7 @@
                 <p class="profile-number">Member ID <span>{{ $member->membership_number }}</span></p>
             </div>
             <div class="profile-membership">
-                <span class="profile-membership-label">MEMBERSHIP LEVEL</span>
+                <span class="profile-membership-label">ASSIGNED/REQUESTED LEVEL</span>
                 <x-membership-level :level="$member->membershipLevel->name" />
             </div>
         </div>
@@ -64,6 +64,12 @@
                 <div><h3>Membership information</h3><p>Category and registration details.</p></div>
             </div>
             <div class="detail-grid membership-detail-grid">
+                <div class="detail-item"><div><small>Account status</small><span>{{ $member->status }}</span></div></div>
+                <div class="detail-item"><div><small>Paid membership status</small><span>{{ $member->paidMembershipStatus() }}</span></div></div>
+                <div class="detail-item"><div><small>Approved level</small><span>{{ $member->approvedMembership?->level_name ?? 'None - no approved membership' }}</span></div></div>
+                <div class="detail-item"><div><small>Requested level (unresolved request)</small><span>{{ $member->unresolvedApplication?->level_name ?? 'No unresolved request' }}</span></div></div>
+                <div class="detail-item"><div><small>Membership validity</small><span>{{ $member->approvedMembership?->membership_start_date?->format('M d, Y') ?? 'Not assigned' }} | {{ $member->approvedMembership?->membership_end_date?->format('M d, Y') ?? 'Not assigned' }}</span></div></div>
+
                 <div class="detail-item">
                     <span class="detail-icon"><x-icon name="users" /></span>
                     <div><small>Membership category</small><span>{{ $member->membershipCategory->name }}</span></div>
@@ -77,7 +83,7 @@
 
         @if ($member->status === 'Active')
             <div class="profile-footer">
-                <div><strong>Need to pause this membership?</strong><p>Deactivating retains this profile and its history. It can be reactivated later.</p></div>
+                <div><strong>Need to deactivate this account?</strong><p>Deactivating retains this profile and its history. It can be reactivated later.</p></div>
                 <form action="{{ route('members.deactivate', $member) }}" method="POST" data-confirm-form data-confirm-title="Deactivate {{ $member->full_name }}?" data-confirm-message="This member will no longer be active. Their profile and history will be kept.">
                     @csrf
                     @method('PATCH')
@@ -86,7 +92,7 @@
             </div>
         @else
             <div class="profile-footer">
-                <div><strong>This member is inactive</strong><p>Reactivate their membership to restore active status.</p></div>
+                <div><strong>This member is inactive</strong><p>Reactivate their account. This does not activate paid membership.</p></div>
                 <form action="{{ route('members.reactivate', $member) }}" method="POST">
                     @csrf
                     @method('PATCH')
@@ -94,5 +100,9 @@
                 </form>
             </div>
         @endif
+    </section>
+    <section class="directory-card transaction-history">
+        <div class="directory-header"><div><h2>Transaction History</h2><p>Applications and renewals for this member.</p></div></div>
+        @include('transactions.partials.table', ['showMember' => false])
     </section>
 @endsection

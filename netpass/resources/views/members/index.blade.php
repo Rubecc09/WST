@@ -23,13 +23,13 @@
         </article>
         <article class="summary-card">
             <span class="summary-icon summary-icon-green"><x-icon name="check" /></span>
-            <div class="summary-label">Active members</div>
+            <div class="summary-label">Active accounts</div>
             <div class="summary-value">{{ number_format($activeMembers) }}</div>
             <div class="summary-foot"><span class="summary-dot dot-green"></span> Currently active</div>
         </article>
         <article class="summary-card">
             <span class="summary-icon summary-icon-gray"><x-icon name="pause" /></span>
-            <div class="summary-label">Inactive members</div>
+            <div class="summary-label">Inactive accounts</div>
             <div class="summary-value">{{ number_format($inactiveMembers) }}</div>
             <div class="summary-foot">Profiles on hold</div>
         </article>
@@ -47,7 +47,7 @@
         <form class="filter-bar" action="{{ route('members.index') }}" method="GET">
             <label class="search-box">
                 <x-icon name="search" />
-                <input type="search" name="search" value="{{ $filters['search'] ?? '' }}" placeholder="Search by member name..." aria-label="Search members by name">
+                <input type="search" name="search" value="{{ $filters['search'] ?? '' }}" placeholder="Search by name or membership number..." aria-label="Search members by name or membership number">
             </label>
             <div class="filter-select-wrap">
                 <x-icon name="filter" class="filter-prefix" />
@@ -60,8 +60,8 @@
                 <x-icon name="chevron-down" class="select-chevron" />
             </div>
             <div class="filter-select-wrap">
-                <select name="level" aria-label="Filter by membership level">
-                    <option value="">All levels</option>
+                <select name="level" aria-label="Filter by assigned level">
+                    <option value="">All assigned levels</option>
                     @foreach ($levels as $level)
                         <option value="{{ $level->id }}" @selected((string) ($filters['level'] ?? '') === (string) $level->id)>{{ $level->name }}</option>
                     @endforeach
@@ -89,8 +89,8 @@
                         <tr>
                             <th scope="col">Member</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Level</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Membership Level</th>
+                            <th scope="col">Account status</th>
                             <th scope="col">Joined</th>
                             <th scope="col"><span class="sr-only">Actions</span></th>
                         </tr>

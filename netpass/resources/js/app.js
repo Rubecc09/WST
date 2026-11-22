@@ -41,6 +41,14 @@ document.querySelectorAll('[data-confirm-form]').forEach((form) => {
         event.preventDefault();
         pendingForm = form;
 
+        if (confirmAccept) {
+            confirmAccept.textContent = form.dataset.confirmLabel || 'Deactivate member';
+        }
+        const note = confirmDialog?.querySelector('[data-confirm-note]');
+        if (note) {
+            note.textContent = form.dataset.confirmNote || 'This is not permanent deletion. The member can be reactivated at any time.';
+        }
+
         if (confirmTitle) {
             confirmTitle.textContent = form.dataset.confirmTitle || 'Deactivate this member?';
         }
@@ -73,3 +81,38 @@ confirmDialog?.addEventListener('close', () => {
         pendingForm = null;
     }
 });
+
+const transactionLevel = document.querySelector('[data-transaction-level]');
+const transactionFee = document.querySelector('[data-transaction-fee]');
+function updateTransactionFee() {
+    const option = transactionLevel?.selectedOptions[0];
+    if (transactionFee) {
+        transactionFee.textContent = option?.dataset.fee
+            ? new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(Number(option.dataset.fee)) + ' / ' + option.dataset.days + ' days'
+            : 'Select a configured level';
+    }
+}
+transactionLevel?.addEventListener('change', updateTransactionFee);
+updateTransactionFee();
+
+const transactionMember = document.querySelector('[data-transaction-member]');
+function updateMemberInformation() {
+    const information = document.querySelector('[data-member-information]');
+    if (information) {
+        information.textContent = transactionMember?.selectedOptions[0]?.dataset.info || 'Select a member to view current membership information.';
+    }
+}
+function selectMemberLevel() {
+    const level = transactionMember?.selectedOptions[0]?.dataset.level;
+    if (transactionLevel) {
+        const option = Array.from(transactionLevel.options).find(option => option.value === level && !option.disabled);
+        transactionLevel.value = option?.value || '';
+        updateTransactionFee();
+    }
+    updateMemberInformation();
+}
+transactionMember?.addEventListener('change', selectMemberLevel);
+if (transactionLevel && !transactionLevel.value) {
+    selectMemberLevel();
+}
+updateMemberInformation();
