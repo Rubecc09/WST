@@ -16,6 +16,8 @@ class TransactionRequest extends FormRequest
         return [
             'member_id' => ['required', 'integer', 'exists:members,id'],
             'membership_level_id' => ['required', 'integer', 'exists:membership_levels,id'],
+            'latitude' => ['nullable', 'required_with:longitude', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'required_with:latitude', 'numeric', 'between:-180,180'],
             'remarks' => ['nullable', 'string', 'max:5000'],
             'status' => ['prohibited'],
             'reference_number' => ['prohibited'],

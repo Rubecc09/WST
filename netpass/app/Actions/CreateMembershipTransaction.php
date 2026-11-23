@@ -42,6 +42,8 @@ class CreateMembershipTransaction
                 'transaction_type' => $type,
                 'amount' => $level->fee,
                 'transaction_date' => now(),
+                'latitude' => $type === MembershipTransaction::APPLICATION ? ($data['latitude'] ?? null) : null,
+                'longitude' => $type === MembershipTransaction::APPLICATION ? ($data['longitude'] ?? null) : null,
                 'remarks' => $data['remarks'] ?? null,
                 'processed_by' => $administrator->id,
             ]);

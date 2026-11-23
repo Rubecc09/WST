@@ -39,13 +39,13 @@
 
 <section class="directory-card transaction-history">
     <div class="directory-header"><div><h2>Payment history</h2><p>Verified receipts are retained with this transaction.</p></div></div>
-    <div class="table-scroll"><table class="member-table">
-        <thead><tr><th>Reference</th><th>Date</th><th>Method</th><th>Amount</th><th>Verification</th><th>Administrator</th><th>Receipt</th></tr></thead>
-        <tbody>
+    <div class="table-scroll"><table role="table" class="member-table">
+        <thead role="rowgroup"><tr role="row"><th scope="col">Reference</th><th scope="col">Date</th><th scope="col">Method</th><th scope="col">Amount</th><th scope="col">Verification</th><th scope="col">Administrator</th><th scope="col">Receipt</th></tr></thead>
+        <tbody role="rowgroup">
             @forelse ($transaction->payments as $payment)
-                <tr><td>{{ $payment->reference_number }}</td><td>{{ $payment->payment_date->format('M d, Y') }}</td><td>{{ $payment->method }}</td><td>PHP {{ $payment->amount }}</td><td>{{ $payment->verified_at?->format('M d, Y H:i') ?? 'Unverified' }}</td><td>{{ $payment->administrator?->name ?? 'Administrator no longer available' }}</td><td><a class="transaction-link" href="{{ route('payments.receipt', $payment) }}">Printable receipt</a></td></tr>
+                <tr role="row"><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Reference</span><div class="mobile-cell-content">{{ $payment->reference_number }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Date</span><div class="mobile-cell-content">{{ $payment->payment_date->format('M d, Y') }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Method</span><div class="mobile-cell-content">{{ $payment->method }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Amount</span><div class="mobile-cell-content">PHP {{ $payment->amount }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Verification</span><div class="mobile-cell-content">{{ $payment->verified_at?->format('M d, Y H:i') ?? 'Unverified' }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Administrator</span><div class="mobile-cell-content">{{ $payment->administrator?->name ?? 'Administrator no longer available' }}</div></td><td role="cell"><span class="mobile-cell-label" aria-hidden="true">Receipt</span><div class="mobile-cell-content"><a class="transaction-link" href="{{ route('payments.receipt', $payment) }}">Printable receipt</a></div></td></tr>
             @empty
-                <tr><td colspan="7">No payments recorded.</td></tr>
+                <tr role="row"><td colspan="7">No payments recorded.</td></tr>
             @endforelse
         </tbody>
     </table></div>

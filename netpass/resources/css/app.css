@@ -275,7 +275,7 @@ select.form-control { appearance: none; padding-right: 30px; background-image: u
     .filter-select-wrap { flex: 1 1 26%; }
     .button-filter { flex: 1 1 auto; }
 }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .sidebar { z-index: 30; width: 252px; transform: translateX(-100%); transition: transform .22s ease; }
     body.sidebar-open .sidebar { transform: translateX(0); }
     body.sidebar-open::before { position: fixed; inset: 0; z-index: 25; background: #10182b80; content: ''; }
@@ -393,7 +393,7 @@ select.form-control { appearance: none; padding-right: 30px; background-image: u
 .transaction-details dt { font-size: .875rem; color: #68758a; }
 .transaction-details dd { margin: 6px 0 0; overflow-wrap: anywhere; }
 .transaction-remarks { grid-column: 1 / -1; white-space: pre-wrap; }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .transaction-details { grid-template-columns: 1fr; }
     .heading-actions { flex-wrap: wrap; }
     .transaction-date-filter { width: 100%; }
@@ -621,7 +621,7 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--cyber-text); box-shadow:
 .remember-label input { accent-color: var(--cyber-yellow); }
 .login-footer { color: var(--cyber-muted); font-size: .8125rem; line-height: 1.6; }
 .mobile-menu { color: var(--cyber-cyan); background: var(--cyber-surface); border-color: #00f0ff55; border-radius: 2px; }
-@media (min-width: 761px) and (max-width: 1100px) {
+@media (min-width: 769px) and (max-width: 1100px) {
     .sidebar { width: 244px; padding-inline: 12px; }
     .main-column { margin-left: 244px; }
     .sidebar-link { padding-inline: 10px; gap: 9px; font-size: .8125rem; }
@@ -636,7 +636,7 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--cyber-text); box-shadow:
     .login-tagline { text-align: center; margin: 0 auto 28px; max-width: 100%; }
     .terminal-title, .terminal-description, .terminal-motif { display: none; }
 }
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .sidebar { width: 280px; }
     .main-column { margin-left: 0; }
     .topbar { height: 66px; padding-inline: 16px; }
@@ -666,4 +666,46 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--cyber-text); box-shadow:
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     .button:hover, .summary-card:hover { transform: none; }
+}
+
+/* Keep desktop table presentation; expose labeled cards on Bootstrap's mobile breakpoint. */
+.mobile-cell-label { display: none; }
+.mobile-cell-content { display: contents; }
+@media (max-width: 768px) {
+    body { min-width: 0; }
+    .main-column, .page-content, .directory-card, .form-card, .profile-card,
+    .page-heading > div, .directory-header > div, .form-card-header > div { min-width: 0; max-width: 100%; }
+    .page-content { overflow-wrap: anywhere; }
+    .table-scroll { overflow: visible; }
+    .member-table, .catalog-table, .transaction-table { display: block; width: 100%; min-width: 0; border: 0; }
+    .member-table thead { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .member-table tbody { display: block; padding: 0 14px 14px; }
+    .member-table tbody tr { display: flow-root; position: static; height: auto; max-height: none; margin: 0 0 14px; padding: 6px 14px; border: 1px solid var(--cyber-border); border-left: 2px solid var(--cyber-cyan); background: var(--cyber-surface); }
+    .member-table tbody tr:last-child { margin-bottom: 0; }
+    .member-table tbody td, .member-table tbody td:first-child, .member-table tbody td:last-child,
+    .catalog-table .catalog-text { display: block; position: static; height: auto; min-height: 0; max-height: none; width: 100%; min-width: 0; max-width: none; padding: 12px 0; text-align: left; white-space: normal; border: 0; }
+    .member-table tbody td + td { border-top: 1px solid var(--cyber-border); }
+    .mobile-cell-label { display: block; margin-bottom: 6px; color: var(--cyber-cyan); font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .mobile-cell-content { display: flow-root; position: static; height: auto; min-height: 0; max-height: none; min-width: 0; max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+    .catalog-text .mobile-cell-content { white-space: pre-line; }
+    .member-meta, .member-meta strong, .member-meta small { min-width: 0; max-width: 100%; white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
+    .member-identity { min-width: 0; }
+    .member-avatar { flex-shrink: 0; }
+    .row-actions, .catalog-actions, .heading-actions { flex-wrap: wrap; justify-content: flex-start; gap: 10px; }
+    .row-actions .icon-action { width: 44px; height: 44px; }
+    .member-table .button, .member-table .transaction-link { min-height: 44px; display: inline-flex; align-items: center; max-width: 100%; white-space: normal; }
+    .filter-bar { display: flex; flex-wrap: wrap; gap: 12px; }
+    .filter-bar > *, .filter-bar .search-box, .filter-bar .filter-select-wrap { flex: 1 1 100%; width: 100%; min-width: 0; max-width: 100%; }
+    .filter-bar input, .filter-bar select, .form-control { min-width: 0; max-width: 100%; font-size: 16px; }
+    .search-box input { width: 100%; }
+    .filter-bar input, .filter-bar select, .filter-bar .button { min-height: 44px; }
+    .form-footer, .heading-actions, .profile-name-row, .profile-membership { flex-wrap: wrap; gap: 12px; }
+    .form-footer > *, .heading-actions > * { max-width: 100%; }
+    .button { white-space: normal; height: auto; min-height: 44px; text-align: center; }
+    .form-grid, .detail-grid, .transaction-details { grid-template-columns: minmax(0, 1fr); }
+    .form-section .row > [class*="col-"] { flex: 0 0 100%; max-width: 100%; }
+    .form-card-header > div { min-width: 0; }
+    .pagination-wrap nav { max-width: 100%; align-self: stretch; }
+    .pagination-wrap nav > div, .pagination-wrap nav span { flex-wrap: wrap; }
+    .detail-item a, .profile-number, .profile-name-row h2 { overflow-wrap: anywhere; }
 }

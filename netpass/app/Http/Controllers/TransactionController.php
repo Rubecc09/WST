@@ -7,10 +7,12 @@ use App\Http\Requests\TransactionRequest;
 use App\Models\Member;
 use App\Models\MembershipLevel;
 use App\Models\MembershipTransaction;
+use App\Notifications\MembershipApplicationSubmitted;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 
 class TransactionController extends Controller
@@ -84,6 +86,11 @@ class TransactionController extends Controller
             report($exception);
 
             return back()->withInput()->with('error', 'The transaction could not be saved. Please try again.');
+        }
+
+        if ($type === MembershipTransaction::APPLICATION) {
+            Notification::route('mail', $transaction->member->email)
+                ->notify(new MembershipApplicationSubmitted($transaction));
         }
 
         return to_route('transactions.show', $transaction)->with('success', $type.' transaction created. Awaiting payment and approval.');

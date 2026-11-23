@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 use LogicException;
 
-#[Fillable(['member_id', 'membership_level_id', 'level_name', 'validity_days', 'transaction_type', 'amount', 'transaction_date', 'remarks', 'processed_by'])]
+#[Fillable(['member_id', 'membership_level_id', 'level_name', 'validity_days', 'transaction_type', 'amount', 'transaction_date', 'remarks', 'processed_by', 'latitude', 'longitude'])]
 class MembershipTransaction extends Model
 {
     /** @use HasFactory<MembershipTransactionFactory> */
@@ -58,7 +58,7 @@ class MembershipTransaction extends Model
 
     protected function casts(): array
     {
-        return ['amount' => 'decimal:2', 'validity_days' => 'integer', 'transaction_date' => 'datetime',
+        return ['latitude' => 'decimal:7', 'longitude' => 'decimal:7', 'amount' => 'decimal:2', 'validity_days' => 'integer', 'transaction_date' => 'datetime',
             'membership_start_date' => 'date', 'membership_end_date' => 'date', 'approved_at' => 'datetime'];
     }
 

@@ -84,9 +84,9 @@
 
         @if ($members->isNotEmpty())
             <div class="table-scroll">
-                <table class="member-table">
-                    <thead>
-                        <tr>
+                <table role="table" class="member-table">
+                    <thead role="rowgroup">
+                        <tr role="row">
                             <th scope="col">Member</th>
                             <th scope="col">Category</th>
                             <th scope="col">Membership Level</th>
@@ -95,7 +95,7 @@
                             <th scope="col"><span class="sr-only">Actions</span></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody role="rowgroup">
                         @foreach ($members as $member)
                             @php
                                 $initials = collect(explode(' ', $member->full_name))
@@ -104,8 +104,8 @@
                                     ->take(2)
                                     ->implode('');
                             @endphp
-                            <tr>
-                                <td>
+                            <tr role="row">
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Member</span><div class="mobile-cell-content">
                                     <a class="member-identity" href="{{ route('members.show', $member) }}">
                                         <span class="member-avatar avatar-{{ $loop->index % 5 }}">{{ mb_strtoupper($initials) }}</span>
                                         <span class="member-meta">
@@ -113,12 +113,12 @@
                                             <small>{{ $member->email }}</small>
                                         </span>
                                     </a>
-                                </td>
-                                <td><span class="category-name">{{ $member->membershipCategory->name }}</span></td>
-                                <td><x-membership-level :level="$member->membershipLevel->name" /></td>
-                                <td><x-member-status :status="$member->status" /></td>
-                                <td class="joined-date">{{ $member->registration_date->format('M d, Y') }}</td>
-                                <td>
+                                </div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Category</span><div class="mobile-cell-content"><span class="category-name">{{ $member->membershipCategory->name }}</span></div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Membership level</span><div class="mobile-cell-content"><x-membership-level :level="$member->membershipLevel->name" /></div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Account status</span><div class="mobile-cell-content"><x-member-status :status="$member->status" /></div></td>
+                                <td role="cell" class="joined-date"><span class="mobile-cell-label" aria-hidden="true">Joined</span><div class="mobile-cell-content">{{ $member->registration_date->format('M d, Y') }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Actions</span><div class="mobile-cell-content">
                                     <div class="row-actions">
                                         <a class="icon-action" href="{{ route('members.show', $member) }}" aria-label="View {{ $member->full_name }}" title="View member"><x-icon name="eye" /></a>
                                         <a class="icon-action" href="{{ route('members.edit', $member) }}" aria-label="Edit {{ $member->full_name }}" title="Edit member"><x-icon name="edit" /></a>
@@ -136,7 +136,7 @@
                                             </form>
                                         @endif
                                     </div>
-                                </td>
+                                </div></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -38,11 +38,6 @@
             </nav>
 
             <div class="sidebar-bottom">
-                <div class="sidebar-help">
-                    <span class="help-icon"><x-icon name="sparkles" /></span>
-                    <strong>Membership made simple</strong>
-                    <p>Keep your community connected and up to date.</p>
-                </div>
                 @auth
                     <div class="sidebar-user">
                         <span class="user-avatar">{{ mb_strtoupper(mb_substr(auth()->user()->name, 0, 1)) }}</span>

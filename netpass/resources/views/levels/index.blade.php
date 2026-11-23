@@ -26,19 +26,19 @@
             <div class="empty-state"><span class="empty-icon"><x-icon name="sparkles" /></span><h3>No levels yet</h3><p>Add a level to make it available for member registration.</p><a class="button button-primary" href="{{ route('levels.create') }}">Add Level</a></div>
         @else
             <div class="table-scroll">
-                <table class="member-table catalog-table">
-                    <thead><tr><th scope="col">Level name</th><th scope="col">Membership fee</th><th scope="col">Validity period</th><th scope="col">Benefits</th><th scope="col">Total members</th><th scope="col">Actions</th></tr></thead>
-                    <tbody>
+                <table role="table" class="member-table catalog-table">
+                    <thead role="rowgroup"><tr role="row"><th scope="col">Level name</th><th scope="col">Membership fee</th><th scope="col">Validity period</th><th scope="col">Benefits</th><th scope="col">Total members</th><th scope="col">Actions</th></tr></thead>
+                    <tbody role="rowgroup">
                         @foreach ($levels as $level)
-                            <tr>
-                                <td><strong>{{ $level->name }}</strong>
+                            <tr role="row">
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Level name</span><div class="mobile-cell-content"><strong>{{ $level->name }}</strong>
                                     @if (! $level->isConfigured())<span class="configuration-badge">Needs configuration</span>@endif
-                                    @if ($level->description)<p class="catalog-description">{{ $level->description }}</p>@endif</td>
-                                <td>{{ $level->fee !== null ? '₱'.number_format((float) $level->fee, 2) : 'Not configured' }}</td>
-                                <td>{{ $level->validity_days !== null ? $level->validity_days.' days' : 'Not configured' }}</td>
-                                <td class="catalog-text">{{ $level->benefits ?? 'Not configured' }}</td>
-                                <td>{{ $level->members_count }}</td>
-                                <td>
+                                    @if ($level->description)<p class="catalog-description">{{ $level->description }}</p>@endif</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Membership fee</span><div class="mobile-cell-content">{{ $level->fee !== null ? '₱'.number_format((float) $level->fee, 2) : 'Not configured' }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Validity period</span><div class="mobile-cell-content">{{ $level->validity_days !== null ? $level->validity_days.' days' : 'Not configured' }}</div></td>
+                                <td role="cell" class="catalog-text"><span class="mobile-cell-label" aria-hidden="true">Benefits</span><div class="mobile-cell-content">{{ $level->benefits ?? 'Not configured' }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Total members</span><div class="mobile-cell-content">{{ $level->members_count }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Actions</span><div class="mobile-cell-content">
                                     <div class="catalog-actions">
                                         <a class="button button-secondary" href="{{ route('levels.edit', $level) }}">Edit<span class="sr-only"> {{ $level->name }}</span></a>
                                         <form action="{{ route('levels.destroy', $level) }}" method="POST" data-confirm-form data-confirm-title="Delete {{ $level->name }}?" data-confirm-message="This level will be permanently deleted. Deletion cannot be undone. Assigned members will never be deleted." data-confirm-label="Delete level" data-confirm-note="Only unused levels can be deleted.">
@@ -47,7 +47,7 @@
                                             <button class="button button-danger-outline" type="submit">Delete<span class="sr-only"> {{ $level->name }}</span></button>
                                         </form>
                                     </div>
-                                </td>
+                                </div></td>
                             </tr>
                         @endforeach
                     </tbody>

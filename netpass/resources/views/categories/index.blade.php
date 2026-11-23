@@ -26,15 +26,15 @@
             <div class="empty-state"><span class="empty-icon"><x-icon name="users" /></span><h3>No categories yet</h3><p>Add a category to make it available for member registration.</p><a class="button button-primary" href="{{ route('categories.create') }}">Add Category</a></div>
         @else
             <div class="table-scroll">
-                <table class="member-table catalog-table">
-                    <thead><tr><th scope="col">Category name</th><th scope="col">Description</th><th scope="col">Total members</th><th scope="col">Actions</th></tr></thead>
-                    <tbody>
+                <table role="table" class="member-table catalog-table">
+                    <thead role="rowgroup"><tr role="row"><th scope="col">Category name</th><th scope="col">Description</th><th scope="col">Total members</th><th scope="col">Actions</th></tr></thead>
+                    <tbody role="rowgroup">
                         @foreach ($categories as $category)
-                            <tr>
-                                <td><strong>{{ $category->name }}</strong></td>
-                                <td class="catalog-text">{{ $category->description ?? 'No description' }}</td>
-                                <td>{{ $category->members_count }}</td>
-                                <td>
+                            <tr role="row">
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Category name</span><div class="mobile-cell-content"><strong>{{ $category->name }}</strong></div></td>
+                                <td role="cell" class="catalog-text"><span class="mobile-cell-label" aria-hidden="true">Description</span><div class="mobile-cell-content">{{ $category->description ?? 'No description' }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Total members</span><div class="mobile-cell-content">{{ $category->members_count }}</div></td>
+                                <td role="cell"><span class="mobile-cell-label" aria-hidden="true">Actions</span><div class="mobile-cell-content">
                                     <div class="catalog-actions">
                                         <a class="button button-secondary" href="{{ route('categories.edit', $category) }}">Edit<span class="sr-only"> {{ $category->name }}</span></a>
                                         <form action="{{ route('categories.destroy', $category) }}" method="POST" data-confirm-form data-confirm-title="Delete {{ $category->name }}?" data-confirm-message="This category will be permanently deleted. Deletion cannot be undone. Assigned members will never be deleted." data-confirm-label="Delete category" data-confirm-note="Only unused categories can be deleted.">
@@ -43,7 +43,7 @@
                                             <button class="button button-danger-outline" type="submit">Delete<span class="sr-only"> {{ $category->name }}</span></button>
                                         </form>
                                     </div>
-                                </td>
+                                </div></td>
                             </tr>
                         @endforeach
                     </tbody>

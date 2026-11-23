@@ -28,6 +28,9 @@
                 </x-form.field>
             </div>
             <div class="col-12 col-md-6"><div class="registration-note"><span><small>Membership fee</small><strong data-transaction-fee aria-live="polite">Select a level</strong></span></div><p class="field-hint">The current database fee is saved when you submit.</p></div>
+            @if ($type === \App\Models\MembershipTransaction::APPLICATION)
+                @include('transactions.partials.location')
+            @endif
             <div class="col-12"><x-form.field name="remarks" label="Remarks"><textarea class="form-control @error('remarks') is-invalid @enderror" name="remarks" id="remarks" rows="3" maxlength="5000">{{ old('remarks') }}</textarea></x-form.field></div>
         </div>
     </div>
